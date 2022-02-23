@@ -1,0 +1,14 @@
+sever:
+  port: 8081
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  timeout: 600000
+  jedis:
+    pool:
+      max-idle: 500
+      min-idle: 50
+      max-total: 2000
+      max-wait: 1000
