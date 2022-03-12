@@ -68,6 +68,12 @@
 			<version>0.11.3.0</version>
 		</dependency>
 
+		<!-- influxdb包 -->
+		<dependency>
+			<groupId>org.influxdb</groupId>
+			<artifactId>influxdb-java</artifactId>
+		</dependency>
+
 
 	</dependencies>
 

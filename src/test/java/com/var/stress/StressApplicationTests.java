@@ -1,18 +1,18 @@
 package com.var.stress;
 
 import com.alibaba.fastjson.JSON;
+import com.hashicorp.nomad.javasdk.NomadException;
 import com.var.stress.components.RedisComponent;
 import com.var.stress.config.DockerConfig;
 import com.var.stress.domain.nomad.dto.*;
-import com.var.stress.domain.nomad.job.Job;
-import com.var.stress.domain.nomad.job.TaskGroups;
-import com.var.stress.domain.nomad.job.Update;
 import com.var.stress.domain.nomad.jobs.Jobs;
 import com.var.stress.service.HttpService;
+import okhttp3.Cookie;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.util.*;
 
 @SpringBootTest
@@ -23,6 +23,9 @@ class StressApplicationTests {
 
 	@Autowired
 	private RedisComponent redisComponent;
+
+//	@Autowired
+//	private NomadService nomadService;
 
 	@Test
 	void contextLoads() {
@@ -69,31 +72,16 @@ class StressApplicationTests {
 	}
 
 	@Test
-	public void testJson(){
-		JobDTO jobDTO = new JobDTO();
-		List<String> datacenter = new ArrayList<>();
-		datacenter.add("beta");
-		jobDTO.setDatacenters(datacenter);
-
-		jobDTO.setId(UUID.randomUUID().toString());
-		jobDTO.setName("test");
-		jobDTO.setType("service");
-		jobDTO.setPriority(50);
-
-		Job job = new Job();
-		job.setJob(jobDTO);
-		Update update = new Update();
-		update.setMaxParallel(1);
-		update.setMinHealthyTime(10000000000L);
-		update.setHealthyDeadline(180000000000L);
-		update.setAutoRevert(false);
-		update.setCanary(0);
-
-		TaskGroups taskGroups = new TaskGroups();
-
-
-		jobDTO.setUpdate(update);
-		System.out.println(JSON.toJSONString(job));
+	public void testJson() throws NomadException, IOException {
+		System.out.println("1");
+//		nomadService.run();
 	}
+
+	@Test
+	public void stop() throws NomadException, IOException {
+//		nomadService.stop();
+		System.out.println("11");
+	}
+
 
 }

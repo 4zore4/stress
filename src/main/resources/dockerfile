@@ -1,0 +1,9 @@
+FROM debian
+RUN apt -y update \
+ && apt -y install python2.7 \
+ && apt -y install curl \
+ && curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py \
+ && python2.7 get-pip.py
+
+COPY /Users/user/PycharmProjects/supervisor-cluster/main.py /data
+CMD ["python2.7", "/data/main.py"]
