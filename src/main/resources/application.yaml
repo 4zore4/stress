@@ -19,9 +19,13 @@ nomad:
     dc1
   dockerImage: test_python:0.5
 
+spring:
   influx:
-    url: http://101.35.96.159:8086
+    url:
     database: stress
     user: user
     password: varqiao
+
+clone:
+  path: test
 
