@@ -21,11 +21,11 @@ nomad:
 
 spring:
   influx:
-    url:
+    url: http://101.35.96.159:8086
     database: stress
     user: user
     password: varqiao
 
 clone:
-  path: test
+  path: /Users/user/test/pull
 
