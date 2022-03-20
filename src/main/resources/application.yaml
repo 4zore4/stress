@@ -13,6 +13,7 @@ redis:
       max-total: 2000
       max-wait: 1000
 
+
 nomad:
   host: http://127.0.0.1:4646
   dataCenters:
@@ -26,6 +27,16 @@ spring:
     user: user
     password: varqiao
 
+  data:
+    mongodb:
+      host: 127.0.0.1
+      authentication-database: admin
+      username: admin
+      password: 123456
+      port: 27017
+      database: test
+      uri: mongodb://admin:123456@localhost/test?authSource=admin&mechanism=SCRAM-SHA-256
+
 clone:
-  path: /Users/user/test/pull
+  path: test
 

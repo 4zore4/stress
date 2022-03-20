@@ -4,10 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.hashicorp.nomad.javasdk.NomadException;
 import com.var.stress.components.RedisComponent;
 import com.var.stress.config.DockerConfig;
+import com.var.stress.dao.ParentCaseDao;
+import com.var.stress.dao.RunConfigDao;
+import com.var.stress.dao.UserDao;
+import com.var.stress.domain.ParentCase;
+import com.var.stress.domain.RunConfig;
+import com.var.stress.domain.shiro.User;
 import com.var.stress.domain.nomad.dto.*;
 import com.var.stress.domain.nomad.jobs.Jobs;
 import com.var.stress.service.HttpService;
-import okhttp3.Cookie;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +31,15 @@ class StressApplicationTests {
 
 //	@Autowired
 //	private NomadService nomadService;
+
+	@Autowired
+	private UserDao userDao;
+
+	@Autowired
+	private RunConfigDao runConfigDao;
+
+	@Autowired
+	private ParentCaseDao parentCaseDao;
 
 	@Test
 	void contextLoads() {
@@ -82,6 +96,65 @@ class StressApplicationTests {
 //		nomadService.stop();
 		System.out.println("11");
 	}
+	@Test
+	public void save(){
+		String id = UUID.randomUUID().toString().replace("-","");
+		User user = new User();
+		user.setId(id);
+		user.setPhone("12345678910");
+		user.setPassword("123456");
+		user.setUsername("qiao");
+		user.setRoles(null);
+		userDao.saveUser(user);
 
+	}
+
+	@Test
+	public void find(){
+//		User user = userDao.findUserByUsername("ajoy");
+//		System.out.println(user.toString());
+	}
+
+	@Test
+	public void updata(){
+//		User user = new User();
+//		user.setPassword("test1");
+//		user.setId(1234567890L);
+//		int res = userDao.updateUserById(user);
+//		System.out.println(res);
+	}
+
+	@Test
+	public void saveConfig(){
+		RunConfig runConfig = new RunConfig();
+		runConfig.setId(112345L);
+		runConfig.setGitHost("https://github.com/4zore4/security.git");
+		runConfig.setCommand("python run -c config.yaml -n 3");
+		runConfig.setProcessNum(10);
+		runConfig.setUserId(12345678920L);
+		runConfigDao.saveRunConfig(runConfig);
+	}
+
+	@Test
+	public void findConfig(){
+		RunConfig runConfig = runConfigDao.findRunConfigByUserId(12345678920L);
+		System.out.println(runConfig.toString());
+	}
+
+	@Test
+	public void  saveParentCase(){
+		ParentCase parentCase = new ParentCase();
+		parentCase.setParentName("test");
+		parentCase.setId(getUUid());
+		parentCase.setDescribe("-----testes");
+		parentCase.setName("");
+		parentCase.setUserId("2b15a51ece824dd0aa13446db32354b7");
+		parentCase.setChildrenCases(null);
+		parentCaseDao.saveParentCase(parentCase);
+	}
+
+	public static String getUUid(){
+		return UUID.randomUUID().toString().replace("-","");
+	}
 
 }

@@ -30,6 +30,7 @@ public class GitUtil {
             Git result = Git.cloneRepository()
                     .setURI(url)
                     .setDirectory(file)
+                    .setTimeout(100000)
                     .call();
             logger.info("path = "+path);
             return true;
